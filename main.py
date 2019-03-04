@@ -4,7 +4,7 @@ from threading import Thread
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QIcon
 from main_screen_widget import Ui_Form
-from SVM import *
+from SVM import SVM_Object
 
 class App(QWidget, Ui_Form):
     def __init__(self):
@@ -42,9 +42,10 @@ class App(QWidget, Ui_Form):
             benchmarking = True
 
             self.score_label.setText("Datos...")
-            x_train, x_test, y_train, y_test = split_data()
+            svm_o = SVM_Object()
+            svm_o.split_data()
             self.score_label.setText("Magia...")
-            svm_thread = Thread(target = svm_train_test(x_train, x_test, y_train, y_test))
+            svm_thread = Thread(target = svm_o.svm_train_test)
 
             svm_thread.daemon = True
 
