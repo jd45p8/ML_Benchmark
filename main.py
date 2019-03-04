@@ -7,17 +7,20 @@ from main_screen_widget import Ui_Form
 from SVM import SVM_Object
 
 class App(QWidget, Ui_Form):
+    #Constructor
     def __init__(self):
         super().__init__()
         self.title = "Benchmark"
         self.setupUi(self)
-        self.init_ui()        
+        self.init_ui()
+    #Initializing the Graphical Interface       
     def init_ui(self):
         self.setWindowTitle(self.title)
         self.start_button.clicked.connect(self.execute_benchmark)
         self.score_label.setText(str(0))
         self.state_label.hide()
         self.show()
+    #Timer for time measurement while the training is takig place
     def start_timer(self):
         global benchmarking
         t = time.time()
@@ -25,11 +28,12 @@ class App(QWidget, Ui_Form):
             t2 = time.time()
             self.state_label.setText("%.2f" % (t2-t) + " seg")
             time.sleep(0.1)
+    #Handler for bencmark execution
     def execute_benchmark(self):
         global benchmarking, svm_thread
         if benchmarking:
             benchmarking = False
-            if svm_thread.isAlive():          
+            if svm_thread.isAlive():
                 svm_thread._stop()
                 self.score_label.setText(0)
                 print("Stoped")

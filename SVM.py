@@ -4,12 +4,14 @@ from sklearn.metrics import accuracy_score
 
 
 class SVM_Object():
+    #Constructor
     def __init__(self):
         self.x_train = None
         self.y_train = None
         self.x_test = None
         self.y_test = None
         self.accuracy = None
+    #Method that obtain the data from data.csv and split it in then way that is needed for trainning the model
     def split_data(self):
         df = pd.read_csv('data.csv')
         le = preprocessing.LabelEncoder()
@@ -26,7 +28,8 @@ class SVM_Object():
         self.y_train = Y[:TRAIN_SIZE]
         self.x_test = X[TRAIN_SIZE:]
         self.y_test = Y[TRAIN_SIZE:]
-
+    
+    #Train and test the model
     def svm_train_test(self):
         clf = svm.SVC(kernel='linear',gamma=1,C=1000)
         clf.fit(self.x_train, self.y_train)

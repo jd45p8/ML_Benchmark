@@ -3,4 +3,4 @@ This is a project for creating a python benchmark to generate an score based on 
 
 # TO-DO
 - [x] Fix the problem with *svm_thread* that stuck the program.
-- [ ] Transform the training into a stoppable process
+- [ ] Transform the training into a stoppable process.
