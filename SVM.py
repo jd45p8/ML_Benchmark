@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 class SVM_Object():
     #Constructor
     def __init__(self):
+        self.sample_count = None
         self.x_train = None
         self.y_train = None
         self.x_test = None
@@ -22,8 +23,10 @@ class SVM_Object():
                 pass
         Y = df['total-per-year']
         X = df.drop('total-per-year', 1)
+        print(Y.size)
 
         TRAIN_SIZE = int(round(X.size*0.7))
+        self.sample_count = Y.size
         self.x_train = X[:TRAIN_SIZE]
         self.y_train = Y[:TRAIN_SIZE]
         self.x_test = X[TRAIN_SIZE:]

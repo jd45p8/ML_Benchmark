@@ -1,5 +1,6 @@
 import sys
 import time
+from multiprocessing import Process
 from threading import Thread
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QIcon
@@ -22,25 +23,30 @@ class App(QWidget, Ui_Form):
         self.show()
     #Timer for time measurement while the training is takig place
     def start_timer(self):
-        global benchmarking
+        global benchmarking, svm_process, svm_o
         t = time.time()
-        while benchmarking:
+        while svm_process.is_alive():
             t2 = time.time()
             self.state_label.setText("%.2f" % (t2-t) + " seg")
             time.sleep(0.1)
+        if benchmarking:
+            print("finished")
+            self.score_label.setText("%.3f" % ((t2-t)/svm_o.sample_count))
+            benchmarking = False
+        else:
+            print("Stopped")
     #Handler for bencmark execution
     def execute_benchmark(self):
-        global benchmarking, svm_thread
+        global benchmarking, svm_process, svm_o
         if benchmarking:
             benchmarking = False
-            if svm_thread.isAlive():
-                svm_thread._stop()
-                self.score_label.setText(0)
-                print("Stoped")
+            if svm_process.is_alive():
+                svm_process.terminate()
+                self.score_label.setText("0")
             self.start_button.setText("Iniciar Prueba")
         else:
-            thread_timer = Thread(target = self.start_timer)
-            thread_timer.daemon = True
+            timer_thread = Thread(target = self.start_timer)
+            timer_thread.daemon = True
             self.state_label.show()
             self.start_button.setText("Detener")
             benchmarking = True
@@ -49,17 +55,15 @@ class App(QWidget, Ui_Form):
             svm_o = SVM_Object()
             svm_o.split_data()
             self.score_label.setText("Magia...")
-            svm_thread = Thread(target = svm_o.svm_train_test)
+            svm_process = Process(target = svm_o.svm_train_test)
 
-            svm_thread.daemon = True
+            svm_process.daemon = True
 
-            svm_thread.start()
-            thread_timer.start()
+            svm_process.start()
+            timer_thread.start()
 
 if __name__ == '__main__':
     APP = QApplication(sys.argv)
     ex = App()
-    global svm_thread
-    svm_thread = Thread()
     benchmarking = False
     sys.exit(APP.exec_())
