@@ -25,7 +25,8 @@ class Ui_Form(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.label = QtWidgets.QLabel(Form)
-        self.label.setStyleSheet("font: 75 30pt \"Ubuntu\";\n"
+        self.label.setStyleSheet("font: 75 50pt \"Arial\";\n"
+"font-weight:600;\n"
 "color: rgb(46, 52, 54);")
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label, 0, QtCore.Qt.AlignHCenter|QtCore.Qt.AlignTop)
@@ -42,7 +43,7 @@ class Ui_Form(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.horizontalLayout_5.addItem(spacerItem4)
         self.score_label = QtWidgets.QLabel(Form)
-        self.score_label.setStyleSheet("font: 75 48pt \"Ubuntu\";\n"
+        self.score_label.setStyleSheet("font: 75 42pt \"Arial\";\n"
 "font-weight:600;\n"
 "color: rgb(46, 52, 54);\n"
 "")
@@ -102,7 +103,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.label.setText(_translate("Form", "<html><head/><body><p align=\"center\"><span style=\" font-size:48pt; font-weight:600;\">Benchmark</span></p></body></html>"))
+        self.label.setText(_translate("Form", "Benchmark"))
         self.score_label.setText(_translate("Form", "0.0"))
         self.state_label.setText(_translate("Form", "Cargando..."))
         self.start_button.setWhatsThis(_translate("Form", "<html><head/><body><p><br/></p></body></html>"))

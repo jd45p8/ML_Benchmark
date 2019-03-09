@@ -30,11 +30,9 @@ class App(QWidget, Ui_Form):
             self.state_label.setText("%.2f" % (t2-t) + " seg")
             time.sleep(0.1)
         if benchmarking:
-            print("finished")
             self.score_label.setText("%.3f" % ((t2-t)/svm_o.sample_count))
+            self.start_button.setText("Repetir prueba")
             benchmarking = False
-        else:
-            print("Stopped")
     #Handler for bencmark execution
     def execute_benchmark(self):
         global benchmarking, svm_process, svm_o

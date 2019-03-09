@@ -23,9 +23,8 @@ class SVM_Object():
                 pass
         Y = df['total-per-year']
         X = df.drop('total-per-year', 1)
-        print(Y.size)
 
-        TRAIN_SIZE = int(round(X.size*0.7))
+        TRAIN_SIZE = int(round(X.shape[0]*0.7))
         self.sample_count = Y.size
         self.x_train = X[:TRAIN_SIZE]
         self.y_train = Y[:TRAIN_SIZE]
@@ -34,7 +33,7 @@ class SVM_Object():
     
     #Train and test the model
     def svm_train_test(self):
-        clf = svm.SVC(kernel='linear',gamma=1,C=1000)
+        clf = svm.SVC(kernel='linear',gamma=1,C=10)
         clf.fit(self.x_train, self.y_train)
         PREDICTED = clf.predict(self.x_test)
 
