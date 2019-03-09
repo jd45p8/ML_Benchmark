@@ -1,6 +1,9 @@
 # SVM_Benchmark
 This is a project for creating a python benchmark to generate an score based on the time that takes to train a SVC using SVM from Sklearn and the number of rows that has the data sheet.
 
+# Screenshots
+![Main screen screenshot](screenshots/main_screen_benchmark.png)
+
 # How to run
 1. Install Python 3.7.
 2. Open a CLI with Python access and install *sklearn*, *pandas* and *pyqt5* Python modules.
